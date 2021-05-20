@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+
+if [ -n "$1" ]; then
+    TASK="$1"
+else
+    TASK="some-task"
+fi
+
+curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST http://localhost:9000/users/1/tasks/"${TASK}"
