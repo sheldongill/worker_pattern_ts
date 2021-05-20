@@ -2,6 +2,12 @@
 
 Demonstration of the asynchronous worker pattern using a message queue and callback notifications.
 
+# Requirements
+
+* NodeJS 12+
+* yarn
+* Redis
+
 # Install
 
 Just clone this repo and when inside the repo install the dependencies:
