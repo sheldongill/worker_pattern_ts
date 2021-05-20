@@ -41,3 +41,6 @@ Send it jobs:
 ```
  > ./bin/add_job <job type>
 ```
+
+UI
+See the status of the jobs in your browser at http://localhost:9000/admin
