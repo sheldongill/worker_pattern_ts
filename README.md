@@ -22,7 +22,7 @@ Build it
 ```
 
 In order to test this code you need to run 3 different services, a main server
-that accepts posting tasks, a client server that will be called by the webhook worker,
+that accepts posting tasks, a client server that will be called by a webhook from a worker,
 and a service to start the workers.
 
 Main service:
@@ -48,5 +48,5 @@ Send it jobs:
  > ./bin/add_job <job type>
 ```
 
-UI
+# UI
 See the status of the jobs in your browser at http://localhost:9000/admin
