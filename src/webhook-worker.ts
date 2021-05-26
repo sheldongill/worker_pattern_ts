@@ -28,7 +28,10 @@ export const webhooksWorker = new Worker<{ userId: string; result: string }>(
           job.attemptsMade + 1
         } of ${maxWebhookAttempts}`
       );
-      await got.post(user.webhook, { json: { result } });
+      const reply = await got.post(user.webhook, { json: { result } }).json().catch(error => {
+          console.log(`ERROR: ${error.response.body}`);
+      });
+      console.log(`Reply ${JSON.stringify(reply)}`);
     } else {
       console.log(
         `Giving up, lets mail user about webhook not working for "${result}"`

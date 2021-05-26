@@ -14,10 +14,10 @@ export const taskWorker = new Worker<{ userId: string; task: any }>(
   config.taskQueueName,
   async (job) => {
     console.log(`Processing job ${job.id} of type ${job.name}`);
-    let answer = Math.floor(Math.random() * 11);
+    const answer = Math.floor(Math.random() * 11);
     await new Promise(r => setTimeout(r, answer * 1000));
 
-    const result = `Result is ${answer} from task performed for ${job.name} with ID ${job.id}`;
+    const result = `Result is ${answer} from task ${job.name} performed for UserId:${job.data.userId} with ID ${job.id}`;
 
     return webhooksQueue.add(
       job.name,
