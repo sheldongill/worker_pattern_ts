@@ -1,0 +1,8 @@
+# Ignore output artifacts:
+build
+dist
+coverage
+
+# Ignore other tile types
+*.html
+*.md

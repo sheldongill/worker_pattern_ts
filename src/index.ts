@@ -8,12 +8,12 @@ import { BullMQAdapter } from "bull-board/bullMQAdapter";
 const taskQueue = new Queue("tasks", { connection: config.connection });
 
 const { router, setQueues, replaceQueues } = createBullBoard([
-    new BullMQAdapter(taskQueue),
+  new BullMQAdapter(taskQueue),
 ]);
 
 const app = express();
 
-app.use('/admin', router);
+app.use("/admin", router);
 
 app.post("/users/:userId/tasks/:taskType", express.json(), (req, res) => {
   const taskData = req.body;

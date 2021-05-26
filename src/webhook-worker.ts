@@ -28,9 +28,12 @@ export const webhooksWorker = new Worker<{ userId: string; result: string }>(
           job.attemptsMade + 1
         } of ${maxWebhookAttempts}`
       );
-      const reply = await got.post(user.webhook, { json: { result } }).json().catch(error => {
+      const reply = await got
+        .post(user.webhook, { json: { result } })
+        .json()
+        .catch((error) => {
           console.log(`ERROR: ${error.response.body}`);
-      });
+        });
       console.log(`Reply ${JSON.stringify(reply)}`);
     } else {
       console.log(
