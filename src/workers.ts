@@ -16,6 +16,9 @@ console.log(`Started workers: ${webhooksWorker.name} and ${taskWorker.name}`);
 taskWorker.on("failed", (err) =>
   console.log("Failed processing task job", err)
 );
+taskQueueScheduler.on("failed", (err) =>
+  console.error("ERROR: failed task", err)
+);
 webhookQueueScheduler.on("failed", (err) =>
-  console.log("Failed processing webhook job", err)
+  console.error("ERROR: Failed processing webhook job", err)
 );

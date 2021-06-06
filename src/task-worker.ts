@@ -3,6 +3,10 @@ import config from "./config";
 
 const webhooksQueue = new Queue("webhooks", { connection: config.connection });
 
+function do_work(effort: number) {
+    return new Promise((r) => setTimeout(r, effort * 1000));
+}
+
 /**
  *  This worker performs some task based on the job.name.
  *  When the task is completed (in this case we just perform a console.log)
@@ -10,12 +14,13 @@ const webhooksQueue = new Queue("webhooks", { connection: config.connection });
  *  the user that the task has been completed
  */
 
-export const taskWorker = new Worker<{ userId: string; task: any }>(
+export const taskWorker = new Worker<{ userId: string; task: string }>(
   config.taskQueueName,
   async (job) => {
     console.log(`Processing job ${job.id} of type ${job.name}`);
     const answer = Math.floor(Math.random() * 11);
-    await new Promise((r) => setTimeout(r, answer * 1000));
+    // await new Promise((r) => setTimeout(r, answer * 1000));
+    await do_work(answer);
 
     const result = `Result is ${answer} from task ${job.name} performed for UserId:${job.data.userId} with ID ${job.id}`;
 
@@ -28,5 +33,8 @@ export const taskWorker = new Worker<{ userId: string; task: any }>(
       }
     );
   },
-  { connection: config.connection }
+  {
+    connection: config.connection,
+    concurrency: config.concurrency
+  }
 );

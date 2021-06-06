@@ -34,7 +34,7 @@ export const webhooksWorker = new Worker<{ userId: string; result: string }>(
         .catch((error) => {
           console.log(`ERROR: ${error.response.body}`);
         });
-      console.log(`Reply ${JSON.stringify(reply)}`);
+      console.log(`Reply ${JSON.stringify(reply)} for ${job.id}`);
     } else {
       console.log(
         `Giving up, lets mail user about webhook not working for "${result}"`
